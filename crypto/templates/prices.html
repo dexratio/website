@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if notfound %}
+        <h6>{{ notfound }}</h6>
+    {% else %}
+        {% if crypto.Response %}
+            <h6>Please type a valid crypto symbol, {{ quote }} is not a valid symbol.</h6>
+            <p>{{ crypto.Message}}</p>
+        {% endif %}
+        <br/>
+        <div class="wrapper">
+            <div class="container d-flex flex-row mb-3 flex-wrap">
+            {% for key,value in crypto.DISPLAY.items %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{ IMAGEURL }}" class="card-img-top" alt="{{ key }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ key }}</h5>
+                    <strong>Price</strong>: {{ value.USD.PRICE }}<br/>
+                    <strong>Day High</strong>: {{ value.USD.HIGHDAY }}<br/>
+                    <strong>Day Low</strong>: {{ value.USD.LOWDAY }}<br/>
+                    <strong>Market Cap</strong>: {{ value.USD.MKTCAP }}<br/><br/>
+                </div>
+            </div>
+            {% endfor %}
+    {% endif %}
+        </div>
+    </div>
+{% endblock %}
